@@ -1,0 +1,11 @@
+name: RT-Extension-SideBySide-CustomView
+version: 0.02
+abstract: SideBySide Ticket View
+author: Torsten Brumm <tbrumm@mac.com>
+license: GPL version 2
+distribution_type: module
+no_index:
+  directory:
+    - html
+    - inc
+generated_by: Module::Install version 0.36

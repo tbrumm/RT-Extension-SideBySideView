@@ -1,0 +1,19 @@
+<%init>
+my $attr = $UserObj->FirstAttribute('SideBySideView');
+my $value = $attr ? $attr->Content : '';
+
+my $current = $ARGSRef->{'SideBySideView'};
+
+if (defined $current and $current ne $value) {
+    $UserObj->SetAttribute(Name    => 'SideBySideView',
+                           Content => $ARGSRef->{'SideBySideView'});
+
+    push @$results, 'Updated SideBySide view';
+}
+</%init>
+<%args>
+$UserObj => undef
+$fields => undef
+$results => undef
+$ARGSRef => undef
+</%args>
