@@ -21,7 +21,7 @@ $Default => 0
 
 <%ONCE>
 my %view_to_desc = (
-    'SideBySide Ticket View' => 'A Side By Side View of a ticket',
+    'SideBySideView' => 'A Side By Side View of a ticket',
 );
 my @view = sort { $view_to_desc{$a} cmp $view_to_desc{$b} } keys %view_to_desc;
 </%ONCE>
