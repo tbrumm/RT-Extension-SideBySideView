@@ -1,7 +1,5 @@
 <%init>
-my $attr = $session{'CurrentUser'}->UserObj->FirstAttribute('SideBySideView');
-
-if ($attr and $attr->Content eq 'SideBySideView') {
+if ( RT->Config->Get( 'SideBySideView', $session{'CurrentUser'} ) ) {
     $m->comp('/SideBySideView/Ticket/Display.html', %$ARGSRef);
     $m->comp('/Elements/Footer');
     $m->abort();
