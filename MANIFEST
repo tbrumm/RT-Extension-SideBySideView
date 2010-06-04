@@ -1,7 +1,6 @@
 Changes
-html/Callbacks/SideBySideView/Ticket/Display.html/Initial
-html/SideBySideView/Ticket/Display.html
-html/SideBySideView/Ticket/Elements/ShowSummary
+html/Ticket/Display.html
+html/Ticket/Elements/ShowSummary
 inc/Module/Install.pm
 inc/Module/Install/Base.pm
 inc/Module/Install/Can.pm
