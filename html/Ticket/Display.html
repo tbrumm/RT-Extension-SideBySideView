@@ -58,13 +58,24 @@
 <& /Elements/ListActions, actions => \@Actions &>
 <& Elements/ShowUpdateStatus, Ticket => $TicketObj &>
 
+% if ( $SideBySideView ) {
+<table width="100%">
+<tr><td valign="top" class="boxcontainer" style="width: 30%">
+% }
+
 % $m->callback( %ARGS, Ticket => $TicketObj, CallbackName => 'BeforeShowSummary' );
+
 <div class="summary">
 <&| /Widgets/TitleBox, title => loc('Ticket metadata') &>
 <& /Ticket/Elements/ShowSummary,  Ticket => $TicketObj, Attachments => $attachments &>
 </&>
 </div>
+
+% if ( $SideBySideView ) {
+</td><td valign="top" class="boxcontainer">
+% } else {
 <br />
+% }
 
 % $m->callback( Ticket => $TicketObj, %ARGS, CallbackName => 'BeforeShowHistory' );
 
@@ -83,11 +94,17 @@
 %     CallbackName => 'AfterShowHistory',
 % );
 
+% if ( $SideBySideView ) {
+</td></tr>
+</table>
+% }
+
 <%ARGS>
 $id => undef
 $TicketObj => undef
 $ShowHeaders => 0
 $Collapsed => undef
+$SideBySideView => RT->Config->Get( 'SideBySideView', $session{'CurrentUser'} )
 </%ARGS>
 
 <%INIT>

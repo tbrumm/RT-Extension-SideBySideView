@@ -78,10 +78,10 @@
     <& /Ticket/Elements/ShowRequestor, Ticket => $Ticket &>
 
 % $m->callback( %ARGS, CallbackName => 'LeftColumn' );
-
+% if ( !RT->Config->Get( 'SideBySideView', $session{'CurrentUser'} ) ) {
   </td>
   <td valign="top" class="boxcontainer">
-
+% }
 % $m->callback( %ARGS, CallbackName => 'RightColumnTop' );
 
 % if ( RT->Config->Get('EnableReminders') ) {
