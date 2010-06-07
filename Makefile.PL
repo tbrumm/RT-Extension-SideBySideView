@@ -1,11 +1,7 @@
 use inc::Module::Install;
 
-RTx('RT-Extension-SideBySideView-CustomView');
+RTx         'RT-Extension-SideBySideView-CustomView';
+all_from    'lib/RT/Extension/SideBySideView/CustomView.pm';
+readme_from 'lib/RT/Extension/SideBySideView/CustomView.pm';
 
-name            ('RT-Extension-SideBySideView-CustomView');
-abstract        ('SideBySide Ticket View for RT');
-author          ('Torsten Brumm <tbrumm@mac.com>');
-version_from    ('lib/RT/Extension/SideBySideView/CustomView.pm');
-license         ('GPL version 2');
-
-&WriteAll;
+WriteAll;

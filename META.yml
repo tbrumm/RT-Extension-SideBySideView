@@ -1,5 +1,5 @@
 ---
-abstract: 'SideBySide Ticket View for RT'
+abstract: 'RT Extension-SideBySideView-CustomView Extension'
 author:
   - 'Torsten Brumm <tbrumm@mac.com>'
 build_requires:
@@ -8,7 +8,7 @@ configure_requires:
   ExtUtils::MakeMaker: 6.42
 distribution_type: module
 generated_by: 'Module::Install version 0.92'
-license: 'GPL version 2'
+license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
@@ -17,4 +17,8 @@ no_index:
   directory:
     - html
     - inc
+requires:
+  perl: 5.8.3
+resources:
+  license: http://dev.perl.org/licenses/
 version: 0.02
