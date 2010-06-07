@@ -1,7 +1,7 @@
 use inc::Module::Install;
 
-RTx         'RT-Extension-SideBySideView-CustomView';
-all_from    'lib/RT/Extension/SideBySideView/CustomView.pm';
-readme_from 'lib/RT/Extension/SideBySideView/CustomView.pm';
+RTx         'RT-Extension-SideBySideView';
+all_from    'lib/RT/Extension/SideBySideView.pm';
+readme_from 'lib/RT/Extension/SideBySideView.pm';
 
 WriteAll;

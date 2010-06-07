@@ -1,5 +1,5 @@
 ---
-abstract: 'RT Extension-SideBySideView-CustomView Extension'
+abstract: 'RT Extension-SideBySideView Extension'
 author:
   - 'Torsten Brumm <tbrumm@mac.com>'
 build_requires:
@@ -12,7 +12,7 @@ license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
   version: 1.4
-name: RT-Extension-SideBySideView-CustomView
+name: RT-Extension-SideBySideView
 no_index:
   directory:
     - html

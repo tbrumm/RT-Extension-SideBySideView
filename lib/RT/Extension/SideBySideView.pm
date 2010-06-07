@@ -1,4 +1,4 @@
-package RT::Extension::SideBySideView::CustomView;
+package RT::Extension::SideBySideView;
 
 use 5.008003;
 use strict;
@@ -40,9 +40,9 @@ original BPS View to a so called SideBySide Ticket View (known from wiki).
 	3. Run "make install" (you may need root permissions)
 
 	4. Additionally, if you're running 3.8, you'll need to add
-	"RT::Extension::SideBySideView::CustomView" to @Plugins in
+	"RT::Extension::SideBySideView" to @Plugins in
 	etc/RT_SiteConfig.pm.  For example:
-	Set( @Plugins, qw(RT::Extension::SideBySideView::CustomView) );
+	Set( @Plugins, qw(RT::Extension::SideBySideView) );
 
 	6. Clear RT's mason cache and restart the web server to make sure the
 	extension is incorporated.
