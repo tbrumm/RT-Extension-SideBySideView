@@ -22,7 +22,7 @@ __END__
 
 =head1 NAME
 
-RT::Extension::SideBySideView
+RT::Extension::SideBySideView - SideBySide Ticket View for RT
 
 =head1 SYNOPSIS
 

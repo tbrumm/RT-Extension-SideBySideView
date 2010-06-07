@@ -1,5 +1,5 @@
 NAME
-    RT::Extension::SideBySideView
+    RT::Extension::SideBySideView - SideBySide Ticket View for RT
 
 SYNOPSIS
     Based on an original Idea from Steve Turner (MIT) and Markus Dirr

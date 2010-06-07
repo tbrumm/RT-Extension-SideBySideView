@@ -1,5 +1,5 @@
 ---
-abstract: 'RT Extension-SideBySideView Extension'
+abstract: 'SideBySide Ticket View for RT'
 author:
   - 'Torsten Brumm <tbrumm@mac.com>'
 build_requires:
