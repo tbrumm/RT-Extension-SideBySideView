@@ -1,6 +1,8 @@
 Changes
 html/Ticket/Display.html
+html/Ticket/Display.html.40
 html/Ticket/Elements/ShowSummary
+html/Ticket/Elements/ShowSummary.40
 inc/Module/Install.pm
 inc/Module/Install/Base.pm
 inc/Module/Install/Can.pm
