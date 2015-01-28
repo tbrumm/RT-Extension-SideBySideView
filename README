@@ -7,6 +7,9 @@ SYNOPSIS
     some Ideas from BPS Wiki this AddOn will give you the option to change
     the Ticket View from original BPS View to a so called SideBySide Ticket
     View (known from wiki).
+    
+    New Version for RT 4.2. Files for RT 4.0 and older are still in place 
+    with .40 extension.
 
 INSTALLATION
             1. Run "perl Makefile.PL"
@@ -15,10 +18,13 @@ INSTALLATION
 
             3. Run "make install" (you may need root permissions)
 
-            4. Additionally, if you're running 3.8, you'll need to add
+            4. Additionally, if you're running 3.8 or 4.0, you'll need to add
             "RT::Extension::SideBySideView" to @Plugins in
             etc/RT_SiteConfig.pm.  For example:
             Set( @Plugins, qw(RT::Extension::SideBySideView) );
+            
+            5. If your are running 4.2, you'll need to add to Plugins like this:
+            Plugin('RT::Extension::SideBySideView');
 
             6. Clear RT's mason cache and restart the web server to make sure the
             extension is incorporated.
