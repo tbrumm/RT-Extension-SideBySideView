@@ -67,8 +67,10 @@
 % $m->callback( %ARGS, CallbackName => 'AfterAttachments' );
     <& /Ticket/Elements/ShowRequestor, Ticket => $Ticket &>
 % $m->callback( %ARGS, CallbackName => 'LeftColumn' );
-%#   </td>
-%#   <td valign="top" class="boxcontainer">
+% if ( !RT->Config->Get( 'SideBySideView', $session{'CurrentUser'} ) ) {
+  </td>
+  <td valign="top" class="boxcontainer">
+% }
 % $m->callback( %ARGS, CallbackName => 'RightColumnTop' );
 % if ( RT->Config->Get('EnableReminders') ) {
     <&|/Widgets/TitleBox, title => loc("Reminders"),
