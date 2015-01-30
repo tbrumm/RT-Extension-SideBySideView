@@ -7,7 +7,7 @@ use warnings;
 our $VERSION = '0.03';
 
 $RT::Config::META{'SideBySideView'} = {
-    Section         => 'RT::Extension::SideBySideView',
+    Section         => 'Ticket Display as SideBySideView',
     Overridable     => 1,
     SortOrder       => 1,
     Widget          => '/Widgets/Form/Boolean',
