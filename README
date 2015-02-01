@@ -7,6 +7,9 @@ SYNOPSIS
     some Ideas from BPS Wiki this AddOn will give you the option to change
     the Ticket View from original BPS View to a so called SideBySide Ticket
     View (known from wiki).
+
+RT VERSION
+    Works with RT 4.0 and 4.2
     
     New Version for RT 4.2. Files for RT 4.0 and older are still in place 
     with .40 extension.
