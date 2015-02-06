@@ -1,13 +1,15 @@
 ---
 abstract: 'SideBySide Ticket View for RT'
 author:
-  - 'Torsten Brumm <tbrumm@mac.com>'
+  - 'Torsten Brumm http://technik.picturepunxx.de/ <tbrumm@mac.com>'
+  - 'Christian Loos <cloos@netsandbox.de>'
 build_requires:
-  ExtUtils::MakeMaker: 6.42
+  ExtUtils::MakeMaker: 6.59
 configure_requires:
-  ExtUtils::MakeMaker: 6.42
+  ExtUtils::MakeMaker: 6.59
 distribution_type: module
-generated_by: 'Module::Install version 0.92'
+dynamic_config: 1
+generated_by: 'Module::Install version 1.14'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -21,4 +23,8 @@ requires:
   perl: 5.8.3
 resources:
   license: http://dev.perl.org/licenses/
-version: 0.02
+  repository: https://github.com/tbrumm/RT-Extension-SideBySideView
+version: '0.03'
+x_module_install_rtx_version: '0.37'
+x_requires_rt: 4.0.0
+x_rt_too_new: 4.4.0
