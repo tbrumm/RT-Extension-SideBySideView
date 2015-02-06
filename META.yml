@@ -24,7 +24,7 @@ requires:
 resources:
   license: http://dev.perl.org/licenses/
   repository: https://github.com/tbrumm/RT-Extension-SideBySideView
-version: '0.03'
+version: '1.00'
 x_module_install_rtx_version: '0.37'
 x_requires_rt: 4.0.0
 x_rt_too_new: 4.4.0
