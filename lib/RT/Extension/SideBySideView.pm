@@ -7,12 +7,12 @@ use warnings;
 our $VERSION = '0.03';
 
 $RT::Config::META{'SideBySideView'} = {
-    Section         => 'Ticket Display as SideBySideView',
+    Section         => 'Ticket display',
     Overridable     => 1,
-    SortOrder       => 1,
     Widget          => '/Widgets/Form/Boolean',
     WidgetArguments => {
-        Description => 'SideBySideView', # loc
+        Description => 'Display History besides Metadata', # loc
+        Hints       => '(' . __PACKAGE__ . ')',
     },
 };
 
