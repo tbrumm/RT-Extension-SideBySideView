@@ -16,15 +16,11 @@ $RT::Config::META{'SideBySideView'} = {
     },
 };
 
-1;
-
-__END__
-
 =head1 NAME
 
 RT::Extension::SideBySideView - SideBySide Ticket View for RT
 
-=head1 SYNOPSIS
+=head1 DESCRIPTION
 
 Based on an original Idea from Steve Turner (MIT) and Markus Dirr (GreenCircle)
 and the ground work of Thomas Sibley (BestPractical) and some Ideas from BPS
@@ -33,24 +29,41 @@ original BPS View to a so called SideBySide Ticket View (known from wiki).
 
 =head1 INSTALLATION
 
-	1. Run "perl Makefile.PL"
+=over
 
-	2. Run "make"
+=item C<perl Makefile.PL>
 
-	3. Run "make install" (you may need root permissions)
+=item C<make>
 
-	4. Additionally, if you're running 3.8, you'll need to add
-	"RT::Extension::SideBySideView" to @Plugins in
-	etc/RT_SiteConfig.pm.  For example:
-	Set( @Plugins, qw(RT::Extension::SideBySideView) );
+=item C<make install>
 
-	6. Clear RT's mason cache and restart the web server to make sure the
-	extension is incorporated.
+May need root permissions
 
-=head1 AUTHOR
+=item Edit your F</opt/rt4/etc/RT_SiteConfig.pm>
 
-	Torsten Brumm <tbrumm@mac.com>
-	Christian Loos <cloos@netsandbox.de>
+If you are using RT 4.2 or greater, add this line:
+
+    Plugin('RT::Extension::SideBySideView');
+
+For RT 4.0, add this line:
+
+    Set(@Plugins, qw(RT::Extension::SideBySideView));
+
+or add C<RT::Extension::SideBySideView> to your existing C<@Plugins> line.
+
+=item Clear your mason cache
+
+    rm -rf /opt/rt4/var/mason_data/ob
+
+=item Restart your webserver
+
+=back
+
+=head1 AUTHORS
+
+Torsten Brumm http://technik.picturepunxx.de/ <tbrumm@mac.com>
+
+Christian Loos <cloos@netsandbox.de>
 
 =head1 LICENCE
 
@@ -59,9 +72,18 @@ it under the same terms as Perl itself.
 
 =head1 THANKS
 
-	Steve Turner (MIT)
-	Markus Dirr (GC)
-	Thomas Sibley (BPS)
-	Christian Loos (NetCologne)
+=over
+
+=item Steve Turner (MIT)
+
+=item Markus Dirr (GC)
+
+=item Thomas Sibley (BPS)
+
+=item Christian Loos (NetCologne)
+
+=back
 
 =cut
+
+1;

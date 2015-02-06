@@ -1,48 +1,47 @@
 NAME
     RT::Extension::SideBySideView - SideBySide Ticket View for RT
 
-SYNOPSIS
+DESCRIPTION
     Based on an original Idea from Steve Turner (MIT) and Markus Dirr
     (GreenCircle) and the ground work of Thomas Sibley (BestPractical) and
     some Ideas from BPS Wiki this AddOn will give you the option to change
     the Ticket View from original BPS View to a so called SideBySide Ticket
     View (known from wiki).
 
-RT VERSION
-    Works with RT 4.0 and 4.2
-    
-    New Version for RT 4.2. Files for RT 4.0 and older are still in place 
-    with .40 extension.
-
 INSTALLATION
-            1. Run "perl Makefile.PL"
+    perl Makefile.PL
+    make
+    make install
+        May need root permissions
 
-            2. Run "make"
+    Edit your /opt/rt4/etc/RT_SiteConfig.pm
+        If you are using RT 4.2 or greater, add this line:
 
-            3. Run "make install" (you may need root permissions)
-
-            4. Additionally, if you're running 3.8 or 4.0, you'll need to add
-            "RT::Extension::SideBySideView" to @Plugins in
-            etc/RT_SiteConfig.pm.  For example:
-            Set( @Plugins, qw(RT::Extension::SideBySideView) );
-            
-            5. If your are running 4.2, you'll need to add to Plugins like this:
             Plugin('RT::Extension::SideBySideView');
 
-            6. Clear RT's mason cache and restart the web server to make sure the
-            extension is incorporated.
+        For RT 4.0, add this line:
 
-AUTHOR
-            Torsten Brumm, http://technik.picturepunxx.de/ <tbrumm@mac.com>
-            Christian Loos <cloos@netsandbox.de>
+            Set(@Plugins, qw(RT::Extension::SideBySideView));
+
+        or add RT::Extension::SideBySideView to your existing @Plugins line.
+
+    Clear your mason cache
+            rm -rf /opt/rt4/var/mason_data/ob
+
+    Restart your webserver
+
+AUTHORS
+    Torsten Brumm http://technik.picturepunxx.de/ <tbrumm@mac.com>
+
+    Christian Loos <cloos@netsandbox.de>
 
 LICENCE
     This library is free software; you can redistribute it and/or modify it
     under the same terms as Perl itself.
 
 THANKS
-            Steve Turner (MIT)
-            Markus Dirr (GC)
-            Thomas Sibley (BPS)
-            Christian Loos (NetCologne)
+    Steve Turner (MIT)
+    Markus Dirr (GC)
+    Thomas Sibley (BPS)
+    Christian Loos (NetCologne)
 
