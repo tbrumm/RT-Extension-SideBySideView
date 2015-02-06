@@ -59,6 +59,13 @@ or add C<RT::Extension::SideBySideView> to your existing C<@Plugins> line.
 
 =back
 
+=head1 UPGRADING
+
+If you are upgrading from 0.03 or earlier, you must remove the old version
+of this extension before installing the new version by running:
+
+    rm -rf /opt/rt4/local/plugins/RT-Extension-SideBySideView/
+
 =head1 AUTHORS
 
 Torsten Brumm http://technik.picturepunxx.de/ <tbrumm@mac.com>
