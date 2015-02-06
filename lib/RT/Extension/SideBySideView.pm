@@ -27,6 +27,9 @@ and the ground work of Thomas Sibley (BestPractical) and some Ideas from BPS
 Wiki this AddOn will give you the option to change the Ticket View from
 original BPS View to a so called SideBySide Ticket View (known from wiki).
 
+RT users will find a new "Display History besides Metadata" option within the
+"Ticket display" section of their Preferences.
+
 =head1 INSTALLATION
 
 =over

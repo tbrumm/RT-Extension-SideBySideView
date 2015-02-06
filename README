@@ -8,6 +8,9 @@ DESCRIPTION
     the Ticket View from original BPS View to a so called SideBySide Ticket
     View (known from wiki).
 
+    RT users will find a new "Display History besides Metadata" option
+    within the "Ticket display" section of their Preferences.
+
 INSTALLATION
     perl Makefile.PL
     make
