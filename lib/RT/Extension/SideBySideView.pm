@@ -56,7 +56,7 @@ or add C<RT::Extension::SideBySideView> to your existing C<@Plugins> line.
 
 =item Clear your mason cache
 
-    rm -rf /opt/rt4/var/mason_data/ob
+    rm -rf /opt/rt4/var/mason_data/obj
 
 =item Restart your webserver
 

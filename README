@@ -29,7 +29,7 @@ INSTALLATION
         or add RT::Extension::SideBySideView to your existing @Plugins line.
 
     Clear your mason cache
-            rm -rf /opt/rt4/var/mason_data/ob
+            rm -rf /opt/rt4/var/mason_data/obj
 
     Restart your webserver
 
