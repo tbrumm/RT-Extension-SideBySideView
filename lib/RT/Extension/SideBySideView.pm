@@ -71,7 +71,7 @@ of this extension before installing the new version by running:
 
 =head1 AUTHORS
 
-Torsten Brumm http://technik.picturepunxx.de/ <tbrumm@mac.com>
+Torsten Brumm http://technik.picturepunxx.de/ <technik@picturepunxx.de>
 
 Christian Loos <cloos@netsandbox.de>
 
