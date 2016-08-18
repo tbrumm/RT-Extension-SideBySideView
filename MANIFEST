@@ -1,3 +1,4 @@
+.travis.yml
 Changes
 html/Callbacks/SideBySideView/Ticket/Display.html/BeforeShowSummary
 inc/Module/Install.pm
