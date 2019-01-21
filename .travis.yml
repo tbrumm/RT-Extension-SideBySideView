@@ -13,7 +13,7 @@ before_install:
 install:
     - docker pull $image
     - docker run -d -v $TRAVIS_BUILD_DIR:/rtx --name rt $image
-    - docker ps -a
+    - docker ps
 
 script:
-    - docker exec -it rt bash -c "cd /rtx && RELEASE_TESTING=1 perl Makefile.PL && make && make test"
+    - docker exec rt bash -c "cd /rtx && RELEASE_TESTING=1 perl Makefile.PL && make && make test"
