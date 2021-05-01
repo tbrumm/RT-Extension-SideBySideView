@@ -16,6 +16,7 @@ jobs:
         rt:
           - '4.2'
           - '4.4'
+          - '5.0'
 
     container: ghcr.io/netsandbox/request-tracker:${{ matrix.rt }}
 
