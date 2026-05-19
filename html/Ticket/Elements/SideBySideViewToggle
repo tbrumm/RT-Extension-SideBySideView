@@ -1,0 +1,15 @@
+<%ARGS>
+$id
+</%ARGS>
+<%INIT>
+my $current = RT->Config->Get( 'TicketViewLayout', $session{'CurrentUser'} ) // '';
+my $is_sbs  = $current eq 'SideBySideView';
+my $target  = $is_sbs ? 'DefaultView' : 'SideBySideView';
+my $title   = $is_sbs ? loc('Switch to Default View') : loc('Switch to Side-by-Side View');
+my $url = RT->Config->Get('WebPath')
+    . '/SideBySideView/SetLayout.html?id=' . $id
+    . '&Layout=' . $target;
+</%INIT>
+<a hx-boost="false" href="<% $url %>" class="menu-item nav-link btn">
+<% GetSVGImage( Name => 'layout-split', Title => $title ) |n %>
+</a>

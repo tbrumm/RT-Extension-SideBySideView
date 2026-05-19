@@ -4,95 +4,146 @@ use 5.10.1;
 use strict;
 use warnings;
 
-our $VERSION = '2.01';
+our $VERSION = '3.00';
 
-$RT::Config::META{'SideBySideView'} = {
+# Register the layout-split icon into RT's SVG config so GetSVGImage() works.
+# Config is already loaded when Plugin() runs, and Get('SVG') returns the live hashref.
+{
+    my $svg = RT->Config->Get('SVG');
+    if ( ref $svg eq 'HASH' ) {
+        $svg->{'layout-split'} =
+            '<path d="M0 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3zm8.5-1v12H14a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1H8.5zm-1 0H2a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h5.5V2z"/>';
+    }
+}
+
+$RT::Config::META{'TicketViewLayout'} = {
     Section         => 'Ticket display',
     Overridable     => 1,
-    Widget          => '/Widgets/Form/Boolean',
+    SortOrder       => 11,
+    Widget          => '/Widgets/Form/Select',
     WidgetArguments => {
-        Description => 'Display History besides Metadata', # loc
-        Hints       => '(' . __PACKAGE__ . ')',
+        Description => 'Ticket display layout',    # loc
+        Values      => [ 'DefaultView', 'SideBySideView' ],
+        ValuesLabel => {
+            DefaultView    => 'Default (two-column metadata + history)',    # loc
+            SideBySideView => 'Side by side (narrow metadata, wide history)',    # loc
+        },
     },
 };
 
+# Layout definitions used by lib/RT/Interface/Web_Overlay.pm
+our %LAYOUTS = (
+
+    DefaultView => [
+        {
+            Title    => 'Ticket metadata',    # loc
+            Layout   => 'col-md-6',
+            Elements => [
+                [
+                    'Basics', 'Times', 'CustomFieldCustomGroupings',
+                    'People', 'Attachments', 'Requestors',
+                ],
+                [
+                    'Reminders', 'Articles', 'Dates',
+                    'LinkedQueues', 'Assets', 'Links',
+                ],
+            ],
+        },
+        {
+            Layout   => 'col-12',
+            Elements => [ 'Description', 'History' ],
+        },
+    ],
+
+    SideBySideView => [
+        {
+            Title    => 'Ticket Information',    # loc
+            Layout   => 'col-md-3, col-md-9',
+            Elements => [
+                [
+                    { HiddenRoles => [], Name => 'Basics' },
+                    {
+                        HiddenRoles => [ 'Change Reviewer', 'Change Implementor' ],
+                        Name        => 'People',
+                    },
+                    'Dates',
+                    'Times',
+                    'Attachments',
+                    'CustomFieldCustomGroupings:Default',
+                    'Links',
+                    'Requestors',
+                    'Articles',
+                    'Assets',
+                    'LinkedArticles',
+                ],
+                [
+                    {
+                        FilterTxnTypes => [
+                            'AddLink',               'AddWatcher',
+                            'Comment',               'CommentEmailRecord',
+                            'Correspond',            'Create',
+                            'CustomField',           'DelWatcher',
+                            'DeleteLink',            'EmailRecord',
+                            'Forward Ticket',        'Forward Transaction',
+                            'Set',                   'SetWatcher',
+                            'Status',
+                        ],
+                        Name => 'History',
+                    },
+                ],
+            ],
+        },
+    ],
+);
+
 =head1 NAME
 
-RT::Extension::SideBySideView - SideBySide Ticket View for RT
+RT::Extension::SideBySideView - Switchable ticket display layouts for RT 6
 
 =head1 DESCRIPTION
 
-Based on an original Idea from Steve Turner (MIT) and Markus Dirr (GreenCircle)
-and the ground work of Thomas Sibley (BestPractical) and some Ideas from BPS
-Wiki this AddOn will give you the option to change the Ticket View from
-original BPS View to a so called SideBySide Ticket View (known from wiki).
+Provides two named ticket display layouts for RT 6 and lets each user choose
+between them via User Preferences or a per-ticket toggle button:
 
-RT users will find a new "Display History besides Metadata" option within the
-"Ticket display" section of their Preferences.
+=over 4
+
+=item DefaultView
+
+Two-column metadata panel plus full-width Description and History below.
+
+=item SideBySideView
+
+Narrow metadata column (col-md-3) beside a wide History column (col-md-9).
+
+=back
+
+Users who have not set a preference continue to see RT's built-in default layout.
 
 =head1 INSTALLATION
 
 =over
 
-=item C<perl Makefile.PL>
+=item C<perl Makefile.PL && make && sudo make install>
 
-=item C<make>
-
-=item C<make install>
-
-May need root permissions
-
-=item Edit your F</opt/rt4/etc/RT_SiteConfig.pm>
-
-If you are using RT 4.2 or greater, add this line:
+=item Add to F</opt/rt6/etc/RT_SiteConfig.pm>
 
     Plugin('RT::Extension::SideBySideView');
 
-For RT 4.0, add this line:
+=item Clear Mason cache and restart Apache
 
-    Set(@Plugins, qw(RT::Extension::SideBySideView));
-
-or add C<RT::Extension::SideBySideView> to your existing C<@Plugins> line.
-
-=item Clear your mason cache
-
-    rm -rf /opt/rt4/var/mason_data/obj
-
-=item Restart your webserver
+    sudo systemctl stop apache2 \
+      && sudo rm -rf /opt/rt6/var/mason_data/obj/* \
+      && sudo systemctl start apache2
 
 =back
 
-=head1 UPGRADING
+=head1 AUTHOR
 
-If you are upgrading from 0.03 or earlier, you must remove the old version
-of this extension before installing the new version by running:
-
-    rm -rf /opt/rt4/local/plugins/RT-Extension-SideBySideView/
-
-=head1 AUTHORS
-
-Torsten Brumm http://technik.picturepunxx.de/ <technik@picturepunxx.de>
-
-Christian Loos <cloos@netsandbox.de>
+Torsten Brumm E<lt>technik@picturepunxx.deE<gt>
 
 =head1 LICENCE
 
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
-
-=head1 THANKS
-
-=over
-
-=item Steve Turner (MIT)
-
-=item Markus Dirr (GC)
-
-=item Thomas Sibley (BPS)
-
-=item Christian Loos (NetCologne)
-
-=back
+GPL version 2
 
 =cut
 

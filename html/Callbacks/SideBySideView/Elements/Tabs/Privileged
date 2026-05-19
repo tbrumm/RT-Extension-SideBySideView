@@ -1,0 +1,16 @@
+<%INIT>
+my $page_menu = PageMenu();
+return unless $page_menu;
+
+my $request_path = $HTML::Mason::Commands::r->path_info;
+return unless $request_path =~ m{^/Ticket/};
+
+my ($id) = ( $DECODED_ARGS->{'id'} // '' ) =~ /^(\d+)$/;
+return unless $id;
+
+$page_menu->child(
+    'sbsview-toggle',
+    raw_html   => $m->scomp( '/Ticket/Elements/SideBySideViewToggle', id => $id ),
+    sort_order => 97,
+);
+</%INIT>

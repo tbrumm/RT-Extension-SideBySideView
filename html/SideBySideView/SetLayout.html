@@ -1,0 +1,22 @@
+<%INIT>
+unless ( $session{'CurrentUser'} && $session{'CurrentUser'}->id ) {
+    Abort( loc('Permission denied'), Code => HTTP::Status::HTTP_FORBIDDEN );
+}
+
+my %valid = map { $_ => 1 } qw( DefaultView SideBySideView );
+my $layout = $ARGS{Layout} // '';
+unless ( $valid{$layout} ) {
+    Abort( loc('Invalid layout name') );
+}
+
+my $user  = $session{'CurrentUser'}->UserObj;
+my $prefs = $user->Preferences( RT->System ) || {};
+$prefs->{TicketViewLayout} = $layout;
+my ( $ok, $msg ) = $user->SetPreferences( RT->System, $prefs );
+RT->Logger->warning("SideBySideView: SetPreferences failed: $msg") unless $ok;
+
+my ($id) = ( $ARGS{id} // '' ) =~ /^(\d+)$/;
+my $url = RT->Config->Get('WebURL') . 'Ticket/Display.html';
+$url .= "?id=$id" if $id;
+RT::Interface::Web::Redirect($url);
+</%INIT>
