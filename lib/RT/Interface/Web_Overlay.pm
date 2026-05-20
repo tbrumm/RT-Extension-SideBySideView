@@ -19,8 +19,10 @@ use warnings;
             my $cu = $HTML::Mason::Commands::session{'CurrentUser'};
             if ( $cu && $cu->id ) {
                 my $pref = RT->Config->Get( 'TicketViewLayout', $cu );
-                if ( $pref && $RT::Extension::SideBySideView::LAYOUTS{$pref} ) {
-                    return $RT::Extension::SideBySideView::LAYOUTS{$pref};
+                if ($pref) {
+                    my $pl = RT->Config->Get('PageLayouts') // {};
+                    my $layout = ( $pl->{'RT::Ticket'} // {} )->{Display}{$pref};
+                    return $layout if $layout;
                 }
             }
         }
