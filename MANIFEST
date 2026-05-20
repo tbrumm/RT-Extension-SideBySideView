@@ -28,8 +28,3 @@ MANIFEST			This list of files
 MANIFEST.SKIP
 META.yml
 README
-xt/00-compile.t
-xt/00-mason-syntax.t
-xt/99-policy.t
-xt/lib/RT/Extension/SideBySideView/Test.pm.in
-xt/pod.t
