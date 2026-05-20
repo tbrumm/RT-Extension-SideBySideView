@@ -51,7 +51,7 @@ our %LAYOUTS = (
         },
         {
             Layout   => 'col-12',
-            Elements => [ 'Description', 'History', 'LinkedTicketsHistory' ],
+            Elements => [ 'Description', 'History' ],
         },
     ],
 
@@ -92,10 +92,6 @@ our %LAYOUTS = (
                     },
                 ],
             ],
-        },
-        {
-            Layout   => 'col-12',
-            Elements => ['LinkedTicketsHistory'],
         },
     ],
 );
