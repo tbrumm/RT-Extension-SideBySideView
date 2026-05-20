@@ -4,7 +4,9 @@ Switchable ticket display layouts for **Request Tracker 6**.
 
 Users can choose between two named page layouts — both via their personal
 preferences and via a one-click toggle button directly in the ticket menu bar.
-No administrator involvement is required after installation.
+Both layouts are also available in the RT admin interface under
+*Admin → Page Layouts*, where they can be assigned to queues like any
+built-in layout.
 
 ---
 
@@ -70,29 +72,42 @@ Narrow metadata column next to a wide transaction history.
 
 ## How it works
 
-RT 6 determines the layout of a ticket display page via
-`HTML::Mason::Commands::GetPageLayout`, which consults the global
-`%PageLayoutMapping` configuration. Because that mapping is global and cannot
-vary per user, this extension wraps `GetPageLayout` through RT's standard
-overlay mechanism (`lib/RT/Interface/Web_Overlay.pm`). The wrapper checks the
-current user's `TicketViewLayout` preference on every ticket display request
-and, when a preference is set, returns the matching layout data structure
-directly — bypassing the global mapping entirely for that user.
+### Layout registration
 
-The preference itself is registered as an `Overridable` RT config option with
-a Select widget, so it appears automatically in the standard RT Preferences
-page under *Ticket display* without any additional template changes.
+At startup the extension registers both layouts in two places:
+
+- **`PageLayouts`** — RT's config key for named layout definitions
+  (`RT::Ticket → Display → LayoutName`). This makes them appear in
+  *Admin → Page Layouts* alongside the built-in layouts and allows
+  administrators to assign them to queues via the normal admin interface.
+- **`PageLayoutMapping`** — indirectly, because once a layout name is in
+  `PageLayouts`, an admin can add a queue assignment there just like any other
+  layout.
+
+### Per-user preference override
+
+Because the `PageLayout` queue mapping is global, the extension also wraps
+`HTML::Mason::Commands::GetPageLayout` via RT's standard overlay mechanism
+(`lib/RT/Interface/Web_Overlay.pm`). On every ticket display request the
+wrapper checks the current user's `TicketViewLayout` preference and, when set,
+returns the matching layout directly — taking priority over any queue-level
+assignment for that user.
+
+The preference is registered as an `Overridable` RT config option with a
+Select widget so it appears automatically in *Preferences → Ticket display*
+without any additional template changes.
+
+### Toggle button
 
 The toggle button is injected into the ticket menu bar via the
 `Elements/Tabs/Privileged` callback, using the same `raw_html` / `sort_order`
-pattern that RT core uses for Bookmark and Timer. Clicking it performs a GET
-request to a small helper page (`SideBySideView/SetLayout.html`) that writes
-the new value into the user's preferences and redirects back to the ticket,
-which then re-renders with the new layout.
+pattern that RT core uses for Bookmark and Timer. Clicking it sends a GET
+request to `SideBySideView/SetLayout.html`, which writes the new value into
+the user's preferences and redirects back to the ticket.
 
 | File | Role |
 |------|------|
-| `lib/RT/Extension/SideBySideView.pm` | Registers the `TicketViewLayout` preference meta, defines both layout data structures, and adds the `layout-split` SVG icon to RT's icon set. |
+| `lib/RT/Extension/SideBySideView.pm` | Registers the `TicketViewLayout` preference meta, defines both layout data structures, registers them in `PageLayouts`, and adds the `layout-split` SVG icon to RT's icon set. |
 | `lib/RT/Interface/Web_Overlay.pm` | Loaded by RT's overlay mechanism at startup. Wraps `GetPageLayout` to honour the per-user layout preference for ticket display pages. |
 | `html/Ticket/Elements/SideBySideViewToggle` | Renders the icon link in the menu bar. Reads the current preference and links to the opposite layout. |
 | `html/Callbacks/SideBySideView/Elements/Tabs/Privileged` | Adds the toggle element to the ticket page menu at `sort_order => 97` (before Bookmark at 98, Timer at 99). |

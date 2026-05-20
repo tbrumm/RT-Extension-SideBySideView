@@ -96,6 +96,17 @@ our %LAYOUTS = (
     ],
 );
 
+# Register our layouts in RT's PageLayouts so they appear in the admin UI
+{
+    my $pl = RT->Config->Get('PageLayouts');
+    if ( ref $pl eq 'HASH' ) {
+        my $ticket_display = $pl->{'RT::Ticket'}{'Display'} //= {};
+        for my $name ( keys %LAYOUTS ) {
+            $ticket_display->{$name} //= $LAYOUTS{$name};
+        }
+    }
+}
+
 =head1 NAME
 
 RT::Extension::SideBySideView - Switchable ticket display layouts for RT 6
